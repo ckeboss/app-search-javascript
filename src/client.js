@@ -41,9 +41,15 @@ export default class Client {
     hostIdentifier,
     searchKey,
     engineName,
-    { endpointBase = "", cacheResponses = true, additionalHeaders } = {}
+    {
+      endpointBase = "",
+      cacheResponses = true,
+      additionalHeaders,
+      fetchOptions = undefined
+    } = {}
   ) {
     this.additionalHeaders = additionalHeaders;
+    this.fetchOptions = fetchOptions;
     this.searchKey = searchKey;
     this.cacheResponses = cacheResponses;
     this.engineName = engineName;
@@ -72,7 +78,10 @@ export default class Client {
       this.querySuggestionPath,
       params,
       this.cacheResponses,
-      { additionalHeaders: this.additionalHeaders }
+      {
+        additionalHeaders: this.additionalHeaders,
+        fetchOptions: this.fetchOptions
+      }
     ).then(handleErrorResponse);
   }
 
@@ -210,7 +219,10 @@ export default class Client {
       `${searchPath}.json`,
       params,
       this.cacheResponses,
-      { additionalHeaders: this.additionalHeaders }
+      {
+        additionalHeaders: this.additionalHeaders,
+        fetchOptions: this.fetchOptions
+      }
     ).then(handleErrorResponse);
   }
 
@@ -237,7 +249,10 @@ export default class Client {
       `${this.clickPath}.json`,
       params,
       this.cacheResponses,
-      { additionalHeaders: this.additionalHeaders }
+      {
+        additionalHeaders: this.additionalHeaders,
+        fetchOptions: this.fetchOptions
+      }
     ).then(handleErrorResponse);
   }
 }
